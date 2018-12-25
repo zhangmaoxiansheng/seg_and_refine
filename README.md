@@ -3,6 +3,8 @@ Code for the two papers [1] and [2].
 The code is written in Matlab and use mex'ed c++ code for the
 optimization parts.
 
+Location code is seg_location.m,you can get the mask.
+
 ![Exampe result](screenshot/teddy.png)
 
 Example result: Two input images and the estimated disparity map.
