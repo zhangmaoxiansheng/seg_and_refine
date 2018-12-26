@@ -1,3 +1,4 @@
+%优先判定上边缘，其次侧边缘，侧边缘重点检测上部清晰处
 %example_global
 %depth = dm.current_dispmap();
 clear;
@@ -28,8 +29,14 @@ for i = 1:num
         depth_data(j) = depth(x(j),y(j));
     end
     index_edge = edge(obj_only,'canny');
-    score = get_up_edge(index_edge,depth_edge,30);%threshhold = 20
+    flag = test_guide(index_edge,obj_only);
+    if flag == 1
+        score = test_up_edge(index_edge,depth_edge,obj_only,30);%threshhold = 20
+    else
+        score = test_side_edge(index_edge,depth_edge,30);
+    end
     %if score > 1, this object is the target
+   
     mean_depth = mean(depth_data);
     %if mean_depth < depth_threshold 
     if score
